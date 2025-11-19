@@ -2,7 +2,7 @@
 
 import "./Home.css";
 import { useEffect,useState } from "react";
-import db from "./firebase";
+/* import db from "./firebase"; */
 import firebase from "firebase/compat/app";
 import Link from "next/link";
 import { useSelector, useDispatch } from 'react-redux';
@@ -11,6 +11,11 @@ import Image from "next/image";
 
 import HeaderImage from "./headerImage.png";
 
+import { db_2 } from "./firebase_realtime.js";
+import { ref, onValue, set, update, remove , query, orderByChild, equalTo} from "firebase/database";
+import { v4 as uuidv4 } from 'uuid';
+
+
 
 const Home = ()=>{
 
@@ -18,22 +23,65 @@ const Home = ()=>{
   const count = useSelector((state) => state.value);
   const dispatch = useDispatch();
 
+
+
+  const blur_image_link = "https://imgs.search.brave.com/HeoLn61NvDjdP6PXVEIX0AH9OtHSD5H_vIgdGxApXXM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA1LzcwLzY5LzU1/LzM2MF9GXzU3MDY5/NTU4NF9Lc0hNQkw5/ZGE2VkVVbXBTY2VD/N2d3ejRzQWE4VTVp/NC5qcGc";
+
   const [products,setProducts] = useState([{
-        product_name : "Product Name",
-        product_price : "55",
-        product_detail : " Product detail" ,
-        leading_image : "Some Image",
-        first_image : "first image",
-        second_image : "second image",
-        third_image : "third image",
-        forth_image : "forth image",
+        product_name : "-----",
+        product_price : "-----",
+        product_detail : "-----" ,
+        leading_image : blur_image_link,
+        first_image : "-----",
+        second_image : "-----",
+        third_image : "-----",
+        forth_image : "-----",
         quantity : 1,
-        sizes : "S",
-        timestamp : firebase.firestore.FieldValue.serverTimestamp()}]);
+        sizes : "S"
+	},
+	{
+        product_name : "-----",
+        product_price : "-----",
+        product_detail : "-----" ,
+        leading_image : blur_image_link,
+        first_image : "-----",
+        second_image : "-----",
+        third_image : "-----",
+        forth_image : "-----",
+        quantity : 1,
+        sizes : "S"
+	},
+	{
+        product_name : "-----",
+        product_price : "-----",
+        product_detail : "-----" ,
+        leading_image : blur_image_link,
+        first_image : "-----",
+        second_image : "-----",
+        third_image : "-----",
+        forth_image : "-----",
+        quantity : 1,
+        sizes : "S"
+	},
+	{
+        product_name : "-----",
+        product_price : "-----",
+        product_detail : "-----" ,
+        leading_image : blur_image_link,
+        first_image : "-----",
+        second_image : "-----",
+        third_image : "-----",
+        forth_image : "-----",
+        quantity : 1,
+        sizes : "S"
+	}]);
 
-  const [categories,setCategories] = useState([]);
+  const [categories,setCategories] = useState([
+		{category:"-----", categoryImage:blur_image_link },
+		{category:"-----", categoryImage:blur_image_link },
+	]);
 
-  const [currentCategoryProducts,setCurrentCategoryProducts] = useState([]);
+  const [currentCategoryProducts,setCurrentCategoryProducts] = useState(products);
 
 
   var list = [];
@@ -44,29 +92,82 @@ const Home = ()=>{
 
 
   useEffect(()=>{
-    db.collection('products').orderBy("timestamp","desc").onSnapshot(snapshot=>{
-      setProducts(snapshot.docs.map(doc=> doc.data()));
-    });
 
-    db.collection('products').orderBy("timestamp","desc").onSnapshot(snapshot=>{
-      snapshot.docs.map(doc=>{
-        if(!list.includes(doc.data().category)){
-          list.push(doc.data().category);
-          tempList.push({categoryName: doc.data().category,categoryImage: doc.data().leading_image })
-        }
-      });
-      setCategories(tempList);
-    });
+		// DISPLAY ITEMS
+		const msgRef = ref(db_2, "messages");
 
-    db.collection('products').orderBy("timestamp","desc").onSnapshot(snapshot=>{
-      snapshot.docs.map(doc =>{
-      if(doc.data().category === "drop-shoulder"){
-        categoryList.push(doc.data())
-      }
-      });
-      setCurrentCategoryProducts(categoryList);
-    });
-  },[currentCategoryProducts]);
+		onValue(msgRef, (snapshot) => {
+			if (snapshot.exists()) {
+				// Equivalent to snapshot.docs.map(...)
+				setProducts(
+				  Object.entries(snapshot.val()).map(([id, value]) => ({
+				    id,
+				    ...value
+				  }))
+				);
+			} else {
+				setProducts([]);
+			} });
+
+
+		// UNIQUE CATEGORIES
+		const productsRef = ref(db_2, "messages");
+
+		onValue(
+			productsRef,
+			(snapshot) => {
+				const map = {}; // category → categoryImage
+
+				snapshot.forEach((child) => {
+					const item = child.val();
+					if (!map[item.category]) {
+					  map[item.category] = item.leading_image; // store the FIRST image
+					}
+				});
+
+				// convert to required format
+				setCategories(
+					Object.entries(map).map(([category, img]) => ({
+					  category,
+					  categoryImage: img,
+					}))
+				);
+			},
+			{ onlyOnce: true }
+		);
+
+
+		// (ADDITIONAL) DISPLAY ITEMS
+		const q = query(
+			ref(db_2, "messages"),
+			orderByChild("category"),
+			equalTo("T-shirts")
+		);
+
+		onValue(
+			q,
+			(snapshot) => {
+				const data = snapshot.val();
+				if (!data) {
+					setCurrentCategoryProducts([]); 
+					return;
+				}
+
+				// convert object → array {id, ...values}
+				setCurrentCategoryProducts(
+				Object.entries(data).map(([id, values]) => ({
+				  id,
+				  ...values,
+				}))
+				);
+			},
+			{ onlyOnce: true }
+		);
+
+
+
+
+  },[]);
 
   return (
     <div className="Home">
@@ -88,7 +189,7 @@ const Home = ()=>{
         <div className="heading_text_and_btn_area">
           <h1 className="large_image">Comfort Zone</h1>
           <span className="intro_text">Comfort Zone is a brand targeting the youth to provide their desired outfits.</span>
-          <div className="cart_btn_in_heading">Cart</div>
+          <Link href="/cart" as="/" className="cart_btn_in_heading">Cart</Link>
         </div>
       </div>
 
@@ -114,22 +215,22 @@ const Home = ()=>{
       <div className="cover">
         {categories.map((item,index)=>{
           return (
-              <Link key={index}  href={`/category/${item.categoryName}`}  className="card">
+              <Link key={index}  href={`/category/${item.category}`}  className="card">
 
                 <img src={item.categoryImage} className="card_image"/>
 
                 <div className="layer"></div>
-                <p className="categoryName">{item.categoryName}</p>
+                <p className="categoryName">{item.category}</p>
               </Link>
             );
         })}
       </div>
 
 
-      <h2 className="products_text">Drop Shoulders</h2>
+      <h2 className="products_text">{currentCategoryProducts[0].category}</h2>
 
       <div className="first_five_products_products_area">
-        {currentCategoryProducts.map((item,index) => {
+        {currentCategoryProducts.filter((item, idx) => idx < 4).map((item,index) => {
           const image_path = item.leading_image;
           return (
             <Link href={`/products/${item.productId}`} key={index} className="first_five_products_product" >

@@ -90,8 +90,7 @@ body{
 }
 
 .singalCategory_product:hover{
-	transform: scale(1.1);
-	padding:2vh 2vw;
+	transform: scale(1.05);
 }
 
 .singalCategory_image{

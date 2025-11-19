@@ -2,12 +2,12 @@
 
 import "./ProductDetail.css";
 import {useState,useEffect} from "react";
-import db from "./firebase_in_product_detail_screen";
-import firebase from "firebase/compat/app";
 import Link from "next/link";
-import { revalidatePath } from 'next/cache';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement, reset, addToCartFunction } from '../../store/reducer.js';
+
+import { db_2 } from "./firebase_realtime_in_product_detail.js";
+import { ref, onValue, set, update, remove } from "firebase/database";
 
 
 
@@ -24,31 +24,51 @@ const ProductDetailScreen = ({params})=>{
 
 
 	const [currentProduct,setCurrentProduct] = useState({
-        product_name : "Product Name",
-        product_price : "55",
-        product_detail : " Product detail" ,
-        leading_image : "Some Image",
-        first_image : "first image",
-        second_image : "second image",
-        third_image : "third image",
-        forth_image : "forth image",
+        product_name : "-----",
+        product_price : "-----",
+        product_detail : "-----" ,
+        leading_image : "https://imgs.search.brave.com/HeoLn61NvDjdP6PXVEIX0AH9OtHSD5H_vIgdGxApXXM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA1LzcwLzY5LzU1/LzM2MF9GXzU3MDY5/NTU4NF9Lc0hNQkw5/ZGE2VkVVbXBTY2VD/N2d3ejRzQWE4VTVp/NC5qcGc",
+        first_image : "-----",
+        second_image : "-----",
+        third_image : "-----",
+        forth_image : "-----",
         quantity : 1,
-        sizes : "S",
-        timestamp : firebase.firestore.FieldValue.serverTimestamp()});
+        sizes : "S"
+	});
 	const [leading_image,set_leading_image] = useState("");
 
   useEffect(()=>{
-    db.collection('products').orderBy("timestamp","desc").onSnapshot(snapshot=>{
-      snapshot.docs.map(doc =>{
-		if(doc.data().productId === params.productId){
-			setCurrentProduct(doc.data()); set_leading_image(doc.data().leading_image)
-		}
-	  });
-    });
+  //   db.collection('products').orderBy("timestamp","desc").onSnapshot(snapshot=>{
+  //     snapshot.docs.map(doc =>{
+		// if(doc.data().productId === params.productId){
+		// 	setCurrentProduct(doc.data()); set_leading_image(doc.data().leading_image)
+		// }
+	 //  });
+	
+   /*  }); */
+
+
+
+		const itemRef = ref(db_2, "messages/" + params.productId);
+
+		onValue(
+			itemRef,
+			(snapshot) => {
+			if (snapshot.exists()) {
+				setCurrentProduct(snapshot.val());
+				set_leading_image(snapshot.val().leading_image);
+				console.log(snapshot.val());
+			} else {
+				setCurrentProduct(null);
+			}
+			},
+			{ onlyOnce: true }
+		);
+
+
 
     for(let i=0;i<cartLength;i++){
     	if(cart[i].productId === params.productId){
-    		console.log("found");
     		setBgCOLOR("grey");
     		set_add_to_cart_btn_text("Added");
     	}
@@ -59,6 +79,8 @@ const ProductDetailScreen = ({params})=>{
   	setBgCOLOR("grey");
   	set_add_to_cart_btn_text("Added");
   }
+
+
 
 
 

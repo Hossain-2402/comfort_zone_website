@@ -72,12 +72,13 @@ body{
 }
 
 .product:hover{
-	transform: scale(1.1);
-	padding:2vh 2vw;
+	transform:scale(1.05);
+
 }
 
 .image{
 	flex:5;
+	height:20vh;
 	width:100%;
 	background-position: center center;
 	transition: .4s;
@@ -180,6 +181,46 @@ body{
 	align-items: center;
 
 }
+
+
+.items{
+	width:80vw;
+	margin:5vh 0 0 50%;
+	transform:translate(-50%,0);
+	color:black;
+}
+.item_EVEN{
+	background:grey;
+	padding:2vh 0 2vh 2vw ; 
+	display:flex;
+}
+
+.item_ODD{
+	background:none;
+	padding:2vh 0 2vh 2vw ; 
+	display:flex;
+}
+
+.operation{
+	float:left;
+	margin:0 0 0 100%;
+	transform:translate(-200%,0); 
+	padding:2vh 2vw;
+	border-radius:10px;
+	box-shadow:0 0 5px black;
+	display:flex;
+	align-items:center;
+	text-align:center;
+	cursor:pointer;
+}
+.update_button{
+	margin:0 0 0 -25%;
+
+}
+
+
+
+
 
 @media(max-width:991px){
 	.ProductsScreen{

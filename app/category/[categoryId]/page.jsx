@@ -2,9 +2,10 @@
 
 import "./SingalCategory.css";
 import {useState,useEffect} from "react";
-import db from "../../firebase";
-import firebase from "firebase/compat/app";
 import Link from "next/link";
+import { db_2 } from "../../firebase_realtime.js";
+import { ref, onValue, set, update, remove , query, orderByChild, equalTo} from "firebase/database";
+
 
 
 
@@ -15,17 +16,54 @@ const SingalCategory = ({params})=>{
 	var list = [];
 
 	useEffect(()=>{
-		db.collection('products').orderBy("timestamp","desc").onSnapshot(snapshot=>{
-		  snapshot.docs.map(doc =>{
-			if(doc.data().category === params.categoryId){
-				list.push(doc.data())
-			}
-		  });
-		  console.log(list)
-		  setCurrentCategoryProducts(list);
-		});
-		console.log(currentCategoryProducts);
-	},[currentCategoryProducts]);
+		// db.collection('products').orderBy("timestamp","desc").onSnapshot(snapshot=>{
+		//   snapshot.docs.map(doc =>{
+		// 	if(doc.data().category === params.categoryId){
+		// 		list.push(doc.data())
+		// 	}
+		//   });
+		//   console.log(list)
+		//   setCurrentCategoryProducts(list);
+		// });
+		// console.log(currentCategoryProducts);
+		//
+
+	
+
+		// (ADDITIONAL) DISPLAY ITEMS
+		const q = query(
+			ref(db_2, "messages"),
+			orderByChild("category"),
+			equalTo(params.categoryId)
+		);
+
+		onValue(
+			q,
+			(snapshot) => {
+				const data = snapshot.val();
+				if (!data) {
+					setCurrentCategoryProducts([]); 
+					return;
+				}
+
+				// convert object → array {id, ...values}
+				setCurrentCategoryProducts(
+				Object.entries(data).map(([id, values]) => ({
+				  id,
+				  ...values,
+				}))
+				);
+			},
+			{ onlyOnce: true }
+		);
+
+
+
+
+
+
+
+	},[]);
 
 
 	return (
