@@ -72,11 +72,11 @@ Not necessery            <div className="search_btn">Search</div>
         {/* The nev_btn_area is designed for the desktop version of this website  */}
 
         <div className="nev_btn_area">
-          <Link href="/" as="/" className="nev_btn">Home  </Link>
-          <Link href="/products" as="/products" className="nev_btn">Products</Link>
-          <Link href="/category" as="category" className="nev_btn">Category</Link>
-          <Link href="/about-us" as="about-us" className="nev_btn">About us</Link>
-          <Link href="/order-status" as="order-status" className="nev_btn o_s">Order Status</Link>
+          <Link href="/" className="nev_btn">Home  </Link>
+          <Link href="/products"  className="nev_btn">Products</Link>
+          <Link href="/category"  className="nev_btn">Category</Link>
+          <Link href="/about-us"  className="nev_btn">About us</Link>
+          <Link href="/order-status"  className="nev_btn o_s">Order Status</Link>
         </div>
       </div>
 
@@ -86,10 +86,10 @@ Not necessery            <div className="search_btn">Search</div>
         <div className="menu_btns_box">
           <Link href="/"  className="nev_btn_for_mobile h_home" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars"); }}><i className="fa fa-home"></i></Link>
           <Link href="/products" className="nev_btn_for_mobile p_products" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars");}}>Products</Link>
-          <Link href="/category"  as="category" className="nev_btn_for_mobile c_category" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars");}}>Category</Link>
-          <Link href="/about-us"  as="about-us" className="nev_btn_for_mobile a_aboutus" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars");}}>About us</Link>
-          <Link href="/order-status"  as="order-status" className="nev_btn_for_mobile or_orderstatus" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars"); }}>Order Status</Link>
-          <Link href="/" as="/cart" className="nev_btn_for_mobile c_b" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars"); }}><i className="fa fa-shopping-cart" ></i></Link>
+          <Link href="/category"  className="nev_btn_for_mobile c_category" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars");}}>Category</Link>
+          <Link href="/about-us"  className="nev_btn_for_mobile a_aboutus" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars");}}>About us</Link>
+          <Link href="/order-status"   className="nev_btn_for_mobile or_orderstatus" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars"); }}>Order Status</Link>
+          <Link href="/"  className="nev_btn_for_mobile c_b" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars"); }}><i className="fa fa-shopping-cart" ></i></Link>
         </div>
       </div>
 

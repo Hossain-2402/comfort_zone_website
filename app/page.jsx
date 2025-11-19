@@ -189,7 +189,7 @@ const Home = ()=>{
         <div className="heading_text_and_btn_area">
           <h1 className="large_image">Comfort Zone</h1>
           <span className="intro_text">Comfort Zone is a brand targeting the youth to provide their desired outfits.</span>
-          <Link href="/cart" as="/" className="cart_btn_in_heading">Cart</Link>
+          <Link href="/cart" as="/cart"  className="cart_btn_in_heading">Cart</Link>
         </div>
       </div>
 
