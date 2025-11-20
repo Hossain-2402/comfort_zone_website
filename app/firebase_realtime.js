@@ -3,14 +3,14 @@ import { getAnalytics } from "firebase/analytics";
 import {getDatabase} from "firebase/database";
 
 const firebaseConfig_2 = {
-  apiKey: "AIzaSyD0s0f8f72Jv_JT64b5YYNQTgW4hKXfqzQ",
-  authDomain: "cz-web-app-10bf9.firebaseapp.com",
-  databaseURL: "https://cz-web-app-10bf9-default-rtdb.firebaseio.com",
-  projectId: "cz-web-app-10bf9",
-  storageBucket: "cz-web-app-10bf9.firebasestorage.app",
-  messagingSenderId: "1092142917642",
-  appId: "1:1092142917642:web:f88de558be3023bef2d7f3",
-  measurementId: "G-W2X7067R16"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 };
 
 const app_2 = getApps().length === 0 
@@ -19,4 +19,5 @@ const app_2 = getApps().length === 0
 
 
 export const db_2 = getDatabase(app_2);
+
 
