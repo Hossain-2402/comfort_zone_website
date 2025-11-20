@@ -2,13 +2,13 @@
 
 import "./CartScreen.css";
 import {useState,useEffect} from "react";
-import db from "./firebase_in_cart";
 import firebase from "firebase/compat/app";
 import Link from "next/link";
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement, reset, addToCartFunction } from '../store/reducer.js';
 import { v4 as uuidv4 } from 'uuid';
-
+import { db_2 } from "../firebase_realtime.js";
+import { ref, onValue, set, update, remove } from "firebase/database";
 
 const CartScreen = ()=>{
 
@@ -30,7 +30,7 @@ const CartScreen = ()=>{
 		forth_image : "forth image",
 		quantity : 1,
 		sizes : "S",
-		timestamp : firebase.firestore.FieldValue.serverTimestamp()
+		
 	});
 	const [leading_image,set_leading_image] = useState("");  
 
@@ -64,7 +64,7 @@ const CartScreen = ()=>{
 		}
 		set_total_product_price(cost);
 		set_total_purchase_price(cost+shipping_price)
-	},[cartProducts,total_product_price])
+	},[])
 
 
 
@@ -126,16 +126,34 @@ const CartScreen = ()=>{
 
 		  const tempUniqueId = uuidv4();
 		  setCheckoutId(tempUniqueId);
-		  db.collection('orders').add({ 
+		  // db.collection('orders').add({ 
+		    // products: cartProducts,
+		    // customerName: customerName,
+		    // customerLocation : customerLocation,
+		    // customerNumber : customerNumber,
+		    // customerEmail : customerEmail,
+		    // timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+		    // checkoutID : tempUniqueId
+				//
+		  // });
+			
+
+
+
+		const data = { 
 		    products: cartProducts,
 		    customerName: customerName,
 		    customerLocation : customerLocation,
 		    customerNumber : customerNumber,
 		    customerEmail : customerEmail,
-		    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 		    checkoutID : tempUniqueId
+		  };
 
-		  });
+
+		set(ref(db_2, "orders/" + tempUniqueId), data);
+	console.log("data added");
+
+
 		  setCustomerName("");
 		  setCustomerLocation("");
 		  setCustomerEmail("");

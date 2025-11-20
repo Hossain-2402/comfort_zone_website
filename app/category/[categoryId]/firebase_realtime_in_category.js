@@ -19,4 +19,3 @@ const app_2 = getApps().length === 0
 
 
 export const db_2 = getDatabase(app_2);
-

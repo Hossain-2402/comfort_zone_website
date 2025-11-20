@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement, reset, addToCartFunction } from '../../store/reducer.js';
 
-import { db_2 } from "./firebase_realtime_in_product_detail.js";
+import { db_2 } from "../../firebase_realtime.js";
 import { ref, onValue, set, update, remove } from "firebase/database";
 
 
@@ -57,7 +57,6 @@ const ProductDetailScreen = ({params})=>{
 			if (snapshot.exists()) {
 				setCurrentProduct(snapshot.val());
 				set_leading_image(snapshot.val().leading_image);
-				console.log(snapshot.val());
 			} else {
 				setCurrentProduct(null);
 			}

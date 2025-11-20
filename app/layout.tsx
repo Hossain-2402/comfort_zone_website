@@ -89,7 +89,7 @@ Not necessery            <div className="search_btn">Search</div>
           <Link href="/category"  className="nev_btn_for_mobile c_category" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars");}}>Category</Link>
           <Link href="/about-us"  className="nev_btn_for_mobile a_aboutus" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars");}}>About us</Link>
           <Link href="/order-status"   className="nev_btn_for_mobile or_orderstatus" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars"); }}>Order Status</Link>
-          <Link href="/"  className="nev_btn_for_mobile c_b" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars"); }}><i className="fa fa-shopping-cart" ></i></Link>
+          <Link href="/cart"  className="nev_btn_for_mobile c_b" onClick={()=>{ set_position_of_the_menu_area_for_mobile("-200vw"); set_class_name_of_icon("fa fa-bars"); }}><i className="fa fa-shopping-cart" ></i></Link>
         </div>
       </div>
 

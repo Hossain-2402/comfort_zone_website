@@ -1,7 +1,7 @@
 "use client"
 
 import "./style.css";
-import { db } from "./firebase_realtime_test.js";
+import { db_2 } from "../firebase_realtime.js";
 import { ref, onValue, set, update, remove } from "firebase/database";
 import { v4 as uuidv4 } from 'uuid';
 import {useState,useEffect} from "react";
@@ -14,7 +14,7 @@ const ConnectDB = ()=>{
 
 	// READ (onValue to get all messages in order)
 	useEffect(() => {
-		const msgRef = ref(db, "messages");
+		const msgRef = ref(db_2, "messages");
 
 		onValue(msgRef, (snapshot) => {
 			if (snapshot.exists()) {
@@ -53,7 +53,7 @@ const ConnectDB = ()=>{
   };
 
 
-		set(ref(db, "messages/" + id), data);
+		set(ref(db_2, "messages/" + id), data);
 	};
 
 
@@ -86,20 +86,20 @@ const ConnectDB = ()=>{
 		};
 
 
-		update(ref(db, "messages/" + id), data);
+		update(ref(db_2, "messages/" + id), data);
 	};
 
 
 	// DELETE
 	const deleteMessage = (id) => {
-		remove(ref(db, "messages/" + id));
+		remove(ref(db_2, "messages/" + id));
 		console.log("message deleted");
 	};
 
 
 
 	const getMessageById = (id) => {
-		const itemRef = ref(db, "messages/" + id);
+		const itemRef = ref(db_2, "messages/" + id);
 
 		onValue(
 			itemRef,
@@ -117,7 +117,7 @@ const ConnectDB = ()=>{
 		
 	return(
 	<>
-	 <button className="button" onClick={()=>{ addMessage() }}>Add item to db</button> 
+	 <button className="button" onClick={()=>{ addMessage() }}>Add item to db_2</button> 
 		
 	      <div className="items">
 		{messages.map((m,index) => (

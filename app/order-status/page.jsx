@@ -2,9 +2,12 @@
 
 import "./OrderStatus.css";
 import Link from "next/link";
-import db from "../cart/firebase_in_cart";
 import firebase from "firebase/compat/app";
 import {useState,useEffect} from "react";
+import { v4 as uuidv4 } from 'uuid';
+import { db_2 } from "../firebase_realtime.js";
+import { ref, onValue, set, update, remove } from "firebase/database";
+
 
 const OrderStatusScreen = ()=>{
 
@@ -20,7 +23,6 @@ const OrderStatusScreen = ()=>{
 		    customerLocation : "customerLocation",
 		    customerNumber : "customerNumber",
 		    customerEmail : "customerEmail",
-		    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
 		    checkoutID : "tempUniqueId"}]);
 
 	const [currentIndex,setCurrentIndex] = useState(0);
@@ -36,9 +38,30 @@ const OrderStatusScreen = ()=>{
 	}
 
 	useEffect(()=>{
-	  	db.collection('orders').orderBy("timestamp","desc").onSnapshot(snapshot=>{
-	      setOrderedProducts(snapshot.docs.map(doc => doc.data()));
-	    });
+	  	// db.collection('orders').orderBy("timestamp","desc").onSnapshot(snapshot=>{
+	   //    setOrderedProducts(snapshot.docs.map(doc => doc.data()));
+	   //  });
+	
+
+		const msgRef = ref(db_2, "orders");
+
+		onValue(msgRef, (snapshot) => {
+			if (snapshot.exists()) {
+				// Equivalent to snapshot.docs.map(...)
+				setOrderedProducts(
+				  Object.entries(snapshot.val()).map(([id, value]) => ({
+				    id,
+				    ...value
+				  }))
+				);
+			} else {
+				setOrderedProducts([]);
+			}
+		});
+
+
+
+
 	},[])
 
 

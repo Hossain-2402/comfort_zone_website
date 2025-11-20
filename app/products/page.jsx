@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement, reset, addToCartFunction } from '../store/reducer.js';
 
 
-import { db_2 } from "./firebase_realtime.js";
+import { db_2 } from "../firebase_realtime.js";
 import { ref, onValue, set, update, remove } from "firebase/database";
 import { v4 as uuidv4 } from 'uuid';
 

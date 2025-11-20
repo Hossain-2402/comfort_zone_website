@@ -106,7 +106,7 @@ body{
 .detail_leading_image{
 	height:95%;
 	flex:6;
-	background-size: 75%;
+	background-size: 60%;
 	transition: .2s;
 }
 
@@ -301,7 +301,7 @@ body{
 	}
 
 	.detail_leading_image{
-		background-size: 100%;
+		background-size: 75%;
 	}
 
 	.detail_product_name{
