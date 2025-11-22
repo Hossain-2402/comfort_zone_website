@@ -83,23 +83,23 @@ const ProductsScreen = ()=>{
 	/* console.log(products); */
 	
 
+	const msgRef = ref(db_2, "messages");
 
-		const msgRef = ref(db_2, "messages");
+	onValue(msgRef, (snapshot) => {
+	  if (!snapshot.exists()) {
+	    setProducts([]);
+	    return;
+	  }
 
-		onValue(msgRef, (snapshot) => {
-			if (snapshot.exists()) {
-				// Equivalent to snapshot.docs.map(...)
-				setProducts(
-				  Object.entries(snapshot.val()).map(([id, value]) => ({
-				    id,
-				    ...value
-				  }))
-				);
-			} else {
-				setProducts([]);
-			}
-		});
+	  const reversed = Object.entries(snapshot.val())
+	    .reverse()                       // ← reverse insertion order
+	    .map(([id, value]) => ({
+	      id,
+	      ...value
+	    }));
 
+	  setProducts(reversed);
+	});
 
 
 	
