@@ -82,26 +82,23 @@ const ProductsScreen = ()=>{
    //  });
 	/* console.log(products); */
 	
+const msgRef = ref(db_2, "messages");
 
-	const msgRef = ref(db_2, "messages");
+onValue(msgRef, (snapshot) => {
+  if (!snapshot.exists()) {
+    setProducts([]);
+    return;
+  }
 
-	onValue(msgRef, (snapshot) => {
-	  if (!snapshot.exists()) {
-	    setProducts([]);
-	    return;
-	  }
+  const sorted = Object.entries(snapshot.val())
+    .sort((a, b) => (a[0] < b[0] ? 1 : -1))  // descending key order
+    .map(([id, value]) => ({
+      id,
+      ...value
+    }));
 
-	  const reversed = Object.entries(snapshot.val())
-	    .reverse()                       // ← reverse insertion order
-	    .map(([id, value]) => ({
-	      id,
-	      ...value
-	    }));
-
-	  setProducts(reversed);
-	});
-
-
+  setProducts(sorted);
+});
 	
   },[]);
 
