@@ -85,6 +85,25 @@ body{
 	background-size: 100%;
 }
 
+.stock_out{
+	opacity:0.5;
+}
+
+.stock_status_text{
+	position:relative;
+	width:50%;
+	top:5%;
+	left:-20%;
+	transform:rotate(-45deg);
+	padding: 2vh 2vw;
+	background:red;
+	color:white;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	z-index:10;
+}
+
 .product_name{
 	flex:.2;
 	width:20vw;
@@ -219,9 +238,12 @@ body{
 }
 
 
+/* Tab */
+@media (min-width: 600px) and (max-width: 768px) {
 
+}
 
-
+/* Mobile */
 @media(max-width:991px){
 	.ProductsScreen{
 		margin: 15vh 0 0 0;
@@ -251,6 +273,11 @@ body{
 		background-position: center center;
 	}
 
+	.stock_status_text{
+		width:150%;
+		top:7.5%;
+		left:-45%;
+	}
 	.product_name{
 		width:100%;
 		font-size: 12px;

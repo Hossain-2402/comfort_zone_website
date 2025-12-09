@@ -21,7 +21,7 @@ const ProductDetailScreen = ({params})=>{
 
   const [bgCOLOR,setBgCOLOR] = useState("#E9BD42");
   const [add_to_cart_btn_text,set_add_to_cart_btn_text] = useState("Add to cart");
-
+  const [add_button_cursor,set_add_button_cursor] = useState("pointer");
 
 	const [currentProduct,setCurrentProduct] = useState({
         product_name : "-----",
@@ -33,7 +33,8 @@ const ProductDetailScreen = ({params})=>{
         third_image : "-----",
         forth_image : "-----",
         quantity : 1,
-        sizes : "S"
+        sizes : "S",
+	stock_status : "in"
 	});
 	const [leading_image,set_leading_image] = useState("");
 
@@ -55,8 +56,17 @@ const ProductDetailScreen = ({params})=>{
 			itemRef,
 			(snapshot) => {
 			if (snapshot.exists()) {
+				let product = snapshot.val();
 				setCurrentProduct(snapshot.val());
 				set_leading_image(snapshot.val().leading_image);
+
+
+				if(product.stock_status === "out") {
+					setBgCOLOR("grey");
+					set_add_button_cursor("default");
+				}
+
+
 			} else {
 				setCurrentProduct(null);
 			}
@@ -65,11 +75,9 @@ const ProductDetailScreen = ({params})=>{
 		);
 
 
-
     for(let i=0;i<cartLength;i++){
     	if(cart[i].productId === params.productId){
-    		setBgCOLOR("grey");
-    		set_add_to_cart_btn_text("Added");
+    		hideBtn();	
     	}
     }
   },[]);
@@ -119,20 +127,21 @@ const ProductDetailScreen = ({params})=>{
 				</div>
 			</div>
 
-			<div style={{ background:bgCOLOR }} className="add_to_cart_btn"
+			<div style={{ background:bgCOLOR, cursor: add_button_cursor }} className="add_to_cart_btn"
 				onClick={() =>{
-          	let isAdded = false;
-          	for(let i=0;i<cart.length;i++){
-          		if(cart[i].productId === currentProduct.productId){
-          			isAdded = true;
-          		}
+					if(currentProduct.stock_status === "out") return;
+					let isAdded = false;
+					for(let i=0;i<cart.length;i++){
+						if(cart[i].productId === currentProduct.productId){
+							isAdded = true;
+						}
+					}
+					if(!isAdded){	
+					dispatch(addToCartFunction(currentProduct));
+					dispatch(increment());
+					hideBtn();
           	}
-          	if(!isAdded){	
-            	dispatch(addToCartFunction(currentProduct));
-            	dispatch(increment());
-            	hideBtn();
-          	}
-        }}>{add_to_cart_btn_text}</div>
+        }}>{currentProduct.stock_status === "out" ? "Out of Stock" : add_to_cart_btn_text}</div>
 
         
       <div className="footer">

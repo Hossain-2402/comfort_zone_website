@@ -82,24 +82,21 @@ const ProductsScreen = ()=>{
    //  });
 	/* console.log(products); */
 	
-const msgRef = ref(db_2, "messages");
+	const msgRef = ref(db_2, "messages");
 
-onValue(msgRef, (snapshot) => {
-  if (!snapshot.exists()) {
-    setProducts([]);
-    return;
-  }
+		onValue(msgRef, (snapshot) => {
+		  if (!snapshot.exists()) {
+		    setProducts([]);
+		    return;
+		  }
 
-  const sorted = Object.entries(snapshot.val())
-    .sort((a, b) => (a[0] < b[0] ? 1 : -1))  // descending key order
-    .map(([id, value]) => ({
-      id,
-      ...value
-    }));
+		  const newestFirst = Object.entries(snapshot.val())
+		    .map(([id, value]) => ({ id, ...value }))
+		    .sort((a, b) => b.createdAt - a.createdAt) // ✅ newest on top
 
-  setProducts(sorted);
-});
-	
+		  setProducts(newestFirst);	
+		});
+
   },[]);
 
 
@@ -157,8 +154,8 @@ onValue(msgRef, (snapshot) => {
 			            <Link href={`/products/${item.productId}`} key={index} className="product" 
 				            >
 
-
-						      <img src={item.leading_image} className="image"/>
+						      {item.stock_status === "out" ? <div className="stock_status_text">out of stock</div> : <></>}
+						      <img src={item.leading_image} className={item.stock_status === "out" ? "image stock_out" : "image"}/>
 
 							<div className="product_name">{item.product_name} </div>
 							<div className="price">৳ {item.product_price}</div>

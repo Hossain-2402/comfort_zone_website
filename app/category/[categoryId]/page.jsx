@@ -32,31 +32,29 @@ const SingalCategory = ({params})=>{
 
 		// (ADDITIONAL) DISPLAY ITEMS
 		const q = query(
-			ref(db_2, "messages"),
-			orderByChild("category"),
-			equalTo(params.categoryId)
+		  ref(db_2, "messages"),
+		  orderByChild("category"),
+		  equalTo(params.categoryId)
 		);
 
 		onValue(
-			q,
-			(snapshot) => {
-				const data = snapshot.val();
-				if (!data) {
-					setCurrentCategoryProducts([]); 
-					return;
-				}
+		  q,
+		  (snapshot) => {
+		    const data = snapshot.val();
+		    if (!data) {
+		      setCurrentCategoryProducts([]);
+		      return;
+		    }
 
-				// convert object → array {id, ...values}
-				setCurrentCategoryProducts(
-				Object.entries(data).map(([id, values]) => ({
-				  id,
-				  ...values,
-				}))
-				);
-			},
-			{ onlyOnce: true }
+		    // convert → array + sort newest first
+		    const sorted = Object.entries(data)
+		      .map(([id, values]) => ({ id, ...values }))
+		      .sort((a, b) => b.createdAt - a.createdAt); // ✅ newest on top
+
+		    setCurrentCategoryProducts(sorted);
+		  },
+		  { onlyOnce: true }
 		);
-
 
 
 

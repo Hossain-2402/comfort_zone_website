@@ -194,6 +194,24 @@ body{
 	background-size: 100%;
 }
 
+.stock_status_text{
+	position:relative;
+	width:50%;
+	top:5%;
+	left:-20%;
+	transform:rotate(-45deg);
+	padding: 2vh 2vw;
+	background:red;
+	color:white;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	z-index:10;
+}
+
+.stock_out{
+	opacity:0.5;
+}
 .first_five_products_product_name{
 	flex:.2;
 	width:20vw;
@@ -394,6 +412,11 @@ body{
 	.first_five_products_image{
 		background-size: 100%;
 		background-position: center center;
+	}
+	.stock_status_text{
+		width:150%;
+		top:7.5%;
+		left:-45%;
 	}
 
 	.first_five_products_product_name{

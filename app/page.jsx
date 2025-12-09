@@ -97,19 +97,18 @@ const Home = ()=>{
 		const msgRef = ref(db_2, "messages");
 
 		onValue(msgRef, (snapshot) => {
-			if (snapshot.exists()) {
-				// Equivalent to snapshot.docs.map(...)
-				setProducts(
-				  Object.entries(snapshot.val()).map(([id, value]) => ({
-				    id,
-				    ...value
-				  }))
-				);
-			} else {
-				setProducts([]);
-			} });
+		  if (!snapshot.exists()) {
+		    setProducts([]);
+		    return;
+		  }
 
+		  const newestFirst = Object.entries(snapshot.val())
+		    .map(([id, value]) => ({ id, ...value }))
+		    .sort((a, b) => b.createdAt - a.createdAt) // ✅ newest on top
 
+		  setProducts(newestFirst);	
+		});
+		
 		// UNIQUE CATEGORIES
 		const productsRef = ref(db_2, "messages");
 
@@ -200,7 +199,8 @@ const Home = ()=>{
           const image_path = item.leading_image;
           return (
             <Link href={`/products/${item.productId}`} key={index} className="first_five_products_product" >
-              <img src={image_path} className="first_five_products_image"/>
+	       {item.stock_status === "out" ? <div className="stock_status_text">out of stock</div> : <></>}
+              <img src={image_path} className={item.stock_status === "out" ? "first_five_products_image stock_out" : "first_five_products_image"}/>
 
               <div className="first_five_products_product_name">{item.product_name} </div>
               <div className="first_five_products_price">৳ {item.product_price}</div>
