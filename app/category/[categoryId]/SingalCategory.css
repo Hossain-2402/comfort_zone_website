@@ -101,6 +101,26 @@ body{
 	background-size: 100%;
 }
 
+.stock_out{
+	opacity:0.5;
+}
+
+.stock_status_text{
+	position:relative;
+	width:50%;
+	top:5%;
+	left:-20%;
+	transform:rotate(-45deg);
+	padding: 2vh 2vw;
+	background:red;
+	color:white;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	z-index:10;
+}
+
+
 .singalCategory_product_name{
 	flex:.2;
 	width:20vw;

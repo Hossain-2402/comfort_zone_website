@@ -33,7 +33,8 @@ const ProductsScreen = ()=>{
         third_image : "-----",
         forth_image : "-----",
         quantity : 1,
-        sizes : "S"
+        sizes : "S",
+	stock_status : "in"
 	},
 	{
         product_name : "-----",
@@ -45,7 +46,8 @@ const ProductsScreen = ()=>{
         third_image : "-----",
         forth_image : "-----",
         quantity : 1,
-        sizes : "S"
+        sizes : "S",
+	stock_status : "in"
 	},
 	{
         product_name : "-----",
@@ -57,7 +59,8 @@ const ProductsScreen = ()=>{
         third_image : "-----",
         forth_image : "-----",
         quantity : 1,
-        sizes : "S"
+        sizes : "S",
+	stock_status : "in"
 	},
 	{
         product_name : "-----",
@@ -69,7 +72,8 @@ const ProductsScreen = ()=>{
         third_image : "-----",
         forth_image : "-----",
         quantity : 1,
-        sizes : "S"
+        sizes : "S",
+	stock_status : "in"
 	}]);
 
 

@@ -80,7 +80,8 @@ const CategoryScreen = ()=>{
 			{products.map((item,index)=>{
 				return (
 						<Link key={index}  href={`/category/${item.category}`}  className="card">
-						      <img src={item.categoryImage} className="card_image"/>
+						      {item.stock_status === "out" ? <div className="stock_status_text">out of stock</div> : <></>}
+						      <img src={item.categoryImage} className={item.stock_status === "out" ? "image stock_out" : "card_image"}/>
 							<div className="layer"></div>
 							<p className="categoryName">{item.category}</p>
 						</Link>
