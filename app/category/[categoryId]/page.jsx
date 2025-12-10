@@ -81,7 +81,7 @@ const SingalCategory = ({params})=>{
 				            >
 
 							{item.stock_status === "out" ? <div className="stock_status_text">out of stock</div> : <></>}
-							<div style={{ backgroundImage: "url("+item.leading_image+")",backgroundPosition :'center center',backgroundRepeat : 'no-repeat'}}  className={item.stock_status === "out" ? "image stock_out" : "singalCategory_image"}></div>
+							<div style={{ backgroundImage: "url("+item.leading_image+")",backgroundPosition :'center center',backgroundRepeat : 'no-repeat'}}  className={item.stock_status === "out" ? "singalCategory_image stock_out" : "singalCategory_image"}></div>
 							<div className="singalCategory_product_name">{item.product_name} </div>
 							<div className="singalCategory_price">৳ {item.product_price}</div>
 			            </Link>);
