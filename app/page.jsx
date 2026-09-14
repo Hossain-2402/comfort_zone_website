@@ -227,7 +227,7 @@ const Home = ()=>{
       </div>
 
 
-      <h2 className="products_text">{currentCategoryProducts[0].category}</h2>
+      <h2 className="products_text">{currentCategoryProducts[0]?.category}</h2>
 
       <div className="first_five_products_products_area">
         {currentCategoryProducts.filter((item, idx) => idx < 4).map((item,index) => {
