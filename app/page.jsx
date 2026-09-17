@@ -199,7 +199,7 @@ const Home = ()=>{
           const image_path = item.leading_image;
           return (
             <Link href={`/products/${item.productId}`} key={index} className="first_five_products_product" >
-	       {item.stock_status === "out" ? <div className="stock_status_text">out of stock</div> : <></>}
+	       {item.stock_status === "out" ? <div className="stock_status_text">Out Of Stock</div> : <></>}
               <img src={image_path} className={item.stock_status === "out" ? "first_five_products_image stock_out" : "first_five_products_image"}/>
 
               <div className="first_five_products_product_name">{item.product_name} </div>
@@ -247,8 +247,8 @@ const Home = ()=>{
         <div className="layer_1">
           <Link href="/" as="/" className="logo_in_footer">CZ</Link>
           <a href="https://www.facebook.com/comfortzone.outfit" className="facebook">Facebook</a>
-          <a href="" className="instagram">Instagram</a>
-          <a href="" className="twitter">Twitter</a>
+          <a href="https://www.instagram.com/comfortzone.outfit" className="instagram">Instagram</a>
+          <a href="https://www.facebook.com/comfysteps.cz" className="twitter">Comfy Steps</a>
         </div>
         <div className="layer_2">© 2024 CZ. All rights reserved.</div>
       </div>

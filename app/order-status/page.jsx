@@ -115,7 +115,7 @@ const OrderStatusScreen = ()=>{
 				<p style={{ float: "left",padding:"2vh 2vw",marginTop: "8vh" }}>{order_status}</p>
 
 				<div style={{ opacity: opacityOfCurrentOrderArea }} className="cart_products_area" >
-					{orderedProducts[currentIndex].products.map((item,index) =>{
+					{orderedProducts[currentIndex]?.products.map((item,index) =>{
 			            return (
 				            <div key={index} className="cartProduct" onClick={()=>{ set_position_of_the_detail_area("0vw"); setCurrentProduct(item); set_leading_image(item.leading_image); setTempIndex(index); setTempSize(item.sizes); setTempQuantity(item.quantity); }}>
 								<div style={{ backgroundImage: "url("+item.leading_image+")",backgroundPosition :'center center',backgroundRepeat : 'no-repeat',backgroundSize : '85%'}}  className="cartProductImage"></div>
@@ -128,13 +128,12 @@ const OrderStatusScreen = ()=>{
 				</div>
 			</div>
 
-			
       <div className="footer">
         <div className="layer_1">
           <Link href="/" as="/" className="logo_in_footer">CZ</Link>
           <a href="https://www.facebook.com/comfortzone.outfit" className="facebook">Facebook</a>
-          <a href="" className="instagram">Instagram</a>
-          <a href="" className="twitter">Twitter</a>
+          <a href="https://www.instagram.com/comfortzone.outfit" className="instagram">Instagram</a>
+          <a href="https://www.facebook.com/comfysteps.cz" className="twitter">Comfy Steps</a>
         </div>
         <div className="layer_2">© 2024 CZ. All rights reserved.</div>
       </div>

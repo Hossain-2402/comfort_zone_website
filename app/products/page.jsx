@@ -158,7 +158,7 @@ const ProductsScreen = ()=>{
 			            <Link href={`/products/${item.productId}`} key={index} className="product" 
 				            >
 
-						      {item.stock_status === "out" ? <div className="stock_status_text">out of stock</div> : <></>}
+						      {item.stock_status === "out" ? <div className="stock_status_text">Out Of Stock</div> : <></>}
 						      <img src={item.leading_image} className={item.stock_status === "out" ? "image stock_out" : "image"}/>
 
 							<div className="product_name">{item.product_name} </div>
@@ -169,16 +169,15 @@ const ProductsScreen = ()=>{
 
 
 
-					
-		      <div className="footer">
-			<div className="layer_1">
-			  <Link href="/" as="/" className="logo_in_footer">CZ</Link>
-			  <a href="https://www.facebook.com/comfortzone.outfit" className="facebook">Facebook</a>
-			  <a href="" className="instagram">Instagram</a>
-			  <a href="" className="twitter">Twitter</a>
-			</div>
-			<div className="layer_2">© 2024 CZ. All rights reserved.</div>
-		      </div>
+				      <div className="footer">
+					<div className="layer_1">
+					  <Link href="/" as="/" className="logo_in_footer">CZ</Link>
+					  <a href="https://www.facebook.com/comfortzone.outfit" className="facebook">Facebook</a>
+					  <a href="https://www.instagram.com/comfortzone.outfit" className="instagram">Instagram</a>
+					  <a href="https://www.facebook.com/comfysteps.cz" className="twitter">Comfy Steps</a>
+					</div>
+					<div className="layer_2">© 2024 CZ. All rights reserved.</div>
+				      </div>
 
 				
 

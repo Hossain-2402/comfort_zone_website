@@ -31,10 +31,11 @@ const SingalCategory = ({params})=>{
 	
 
 		// (ADDITIONAL) DISPLAY ITEMS
+
 		const q = query(
 		  ref(db_2, "messages"),
 		  orderByChild("category"),
-		  equalTo(params.categoryId)
+		  equalTo(decodeURIComponent(params.categoryId)) // decodeURIComponent("Cargo%20Pant") = "Cargo Pant"
 		);
 
 		onValue(
@@ -69,7 +70,7 @@ const SingalCategory = ({params})=>{
 			<div className="desktop_menu_item_selected_style_for_category_page_in_detail_area">
 				<div className="nevigation_btn_background_style_in_category_page_in_detail_area " > </div>
 				<div className="nevigation_btn_background_style_in_category_page_in_detail_area "></div>
-				<div className="nevigation_btn_background_style_in_category_page_in_detail_area b_in_detail_area">{params.categoryId}</div>
+				<div className="nevigation_btn_background_style_in_category_page_in_detail_area b_in_detail_area">{decodeURIComponent(params.categoryId)}</div>
 				<div className="nevigation_btn_background_style_in_category_page_in_detail_area bg_white"> </div>
 				<div className="nevigation_btn_background_style_in_category_page_in_detail_area bg_white o_s_in_detail_area"> </div>
 			</div>
@@ -92,8 +93,8 @@ const SingalCategory = ({params})=>{
         <div className="layer_1">
           <Link href="/" as="/" className="logo_in_footer">CZ</Link>
           <a href="https://www.facebook.com/comfortzone.outfit" className="facebook">Facebook</a>
-          <a href="" className="instagram">Instagram</a>
-          <a href="" className="twitter">Twitter</a>
+          <a href="https://www.instagram.com/comfortzone.outfit" className="instagram">Instagram</a>
+          <a href="https://www.facebook.com/comfysteps.cz" className="twitter">Comfy Steps</a>
         </div>
         <div className="layer_2">© 2024 CZ. All rights reserved.</div>
       </div>

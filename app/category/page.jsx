@@ -80,7 +80,7 @@ const CategoryScreen = ()=>{
 			{products.map((item,index)=>{
 				return (
 						<Link key={index}  href={`/category/${item.category}`}  className="card">
-						      {item.stock_status === "out" ? <div className="stock_status_text">out of stock</div> : <></>}
+						      {item.stock_status === "out" ? <div className="stock_status_text">Out Of Stock</div> : <></>}
 						      <img src={item.categoryImage} className={item.stock_status === "out" ? "image stock_out" : "card_image"}/>
 							<div className="layer"></div>
 							<p className="categoryName">{item.category}</p>
@@ -89,13 +89,12 @@ const CategoryScreen = ()=>{
 			})}
 			</div>
 
-			
       <div className="footer">
         <div className="layer_1">
           <Link href="/" as="/" className="logo_in_footer">CZ</Link>
           <a href="https://www.facebook.com/comfortzone.outfit" className="facebook">Facebook</a>
-          <a href="" className="instagram">Instagram</a>
-          <a href="" className="twitter">Twitter</a>
+          <a href="https://www.instagram.com/comfortzone.outfit" className="instagram">Instagram</a>
+          <a href="https://www.facebook.com/comfysteps.cz" className="twitter">Comfy Steps</a>
         </div>
         <div className="layer_2">© 2024 CZ. All rights reserved.</div>
       </div>
