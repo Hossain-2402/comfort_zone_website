@@ -2,9 +2,7 @@
 
 import "./OrderStatus.css";
 import Link from "next/link";
-import firebase from "firebase/compat/app";
 import {useState,useEffect} from "react";
-import { v4 as uuidv4 } from 'uuid';
 import { db_2 } from "../firebase_realtime.js";
 import { ref, onValue, set, update, remove } from "firebase/database";
 

@@ -120,10 +120,10 @@ const ProductDetailScreen = ({params})=>{
 					<div className="detail_leading_image" style={{ backgroundImage: "url("+leading_image+")",backgroundRepeat : 'no-repeat',backgroundPosition : 'center center'}}></div>
 				</div>
 				<div className="product_detail_info_area">
-					<div class="detail_product_name"> {currentProduct.product_name} </div>
+					<div className="detail_product_name"> {currentProduct.product_name} </div>
 					{/*<div class="detail_category_name">Category: category</div>*/}
-					<pre class="detail_product_description">{currentProduct.product_detail}</pre>
-					<div class="detail_price">৳ {currentProduct.product_price}</div>
+					<pre className="detail_product_description">{currentProduct.product_detail}</pre>
+					<div className="detail_price">৳ {currentProduct.product_price}</div>
 				</div>
 			</div>
 

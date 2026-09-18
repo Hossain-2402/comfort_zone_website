@@ -64,8 +64,8 @@ body{
 .card{
 	position: sticky;
 	top:22vh;
-	height:70vh;
-	width:30vw;
+	height:40vh;
+	width:20vw;
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
@@ -226,8 +226,9 @@ body{
 
 	.card{
 		top:15vh;
-		height:80vh;
+		height:40vh;
 		width:90vw;
+		font-size: 30px;
 	}
 	
 	.footer{

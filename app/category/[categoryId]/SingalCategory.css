@@ -1,9 +1,14 @@
+
+
 body{
 	padding:0;
 	margin: 0;
 	width:100vw;
 	overflow-x: hidden;
 }
+
+
+
 
 
 ::-webkit-scrollbar{
@@ -107,12 +112,14 @@ body{
 
 .stock_status_text{
 	position:relative;
-	width:50%;
-	top:5%;
-	left:-20%;
-	transform:rotate(-45deg);
-	padding: 2vh 2vw;
-	background:red;
+	width:100%;
+	top:70%;
+	left:0;
+	transform: rotate(0deg);
+	padding: 2vh 0;
+	background:black;
+	backdrop-filter:blur(100px);
+	box-shadow:0 0 50px black;
 	color:white;
 	display:flex;
 	align-items:center;
@@ -220,6 +227,13 @@ body{
 
 @media(max-width: 991px){
 
+	*{
+		overflow-x: hidden;
+	}
+
+
+
+
 	.SingalCategory{
 		margin: 10vh 0 0 0;
 	}
@@ -247,12 +261,23 @@ body{
 		background-position: center center;
 	}
 
+
+	.stock_status_text{
+		width:150%;
+		top:55%;
+		left:-25%;
+		box-shadow: none ;
+	}
+
+
 	.singalCategory_product_name{
+		flex: 0.75;
 		width:100%;
 		font-size: 12px;
 	}
 
 	.singalCategory_price{
+		flex: 0.75;
 		width:100%;
 		font-size: 20px;
 	}
