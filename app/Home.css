@@ -401,7 +401,7 @@ body{
 
 
 	.first_five_products_products_area{
-		height:100vh;
+		height:auto;
 		grid-template-columns: 1fr 1fr ;
 		grid-gap: 2vw 2vw;
 	}
@@ -424,11 +424,13 @@ body{
 	}
 
 	.first_five_products_product_name{
+		flex:0.75;
 		width:100%;
 		font-size: 12px;
 	}
 
 	.first_five_products_price{
+		flex:0.75;
 		width:100%;
 		font-size: 20px;
 	}
