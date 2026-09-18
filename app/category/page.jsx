@@ -65,7 +65,7 @@ const CategoryScreen = ()=>{
 
 
 
-  },[products]);
+  },[]);
 
 	return (
 		<div className="CategoryScreen">
